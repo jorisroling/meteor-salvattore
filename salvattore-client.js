@@ -4,6 +4,8 @@ salvattore.addItem=function(data,template) {
 	var grid = document.querySelector('#columns');
 	var item = document.createElement('div');
 	salvattore['append_elements'](grid, [item])
-	item.outerHTML=Blaze.toHTML(Blaze.With(data, function() { return Template[template]; }));
+	// item.outerHTML=Blaze.toHTML(Blaze.With(data, function() { return Template[template]; }));
+	
+	item.outerHTML=Blaze.toHTMLWithData(Template[template],data)
 }
 
