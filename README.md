@@ -1,4 +1,4 @@
-Meteor implementation of (Salvattore)[http://salvattore.com]
+Meteor implementation of [Salvattore](http://salvattore.com)
 
 Use ```{{ > salvattore }}``` in your template where you'd like to have the salvattore grid.
 
