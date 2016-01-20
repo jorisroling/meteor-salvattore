@@ -1,5 +1,7 @@
 
 salvattore=null;
+
+function salvattoreInit() {
 /*!
  * Salvattore 1.0.9 by @rnmp and @ppold
  * https://github.com/rnmp/salvattore
@@ -11,6 +13,7 @@ salvattore=null;
     module.exports = factory();
   } else {
 	  salvattore = root.salvattore = factory(); // JJR salvattore =
+	  salvattore.initialize=salvattoreInit;
   }
 }(this, function() {
 /*! matchMedia() polyfill - Test a CSS media type/query in JS. Authors & copyright (c) 2012: Scott Jehl, Paul Irish, Nicholas Zakas, David Knight. Dual MIT/BSD license */
@@ -566,13 +569,24 @@ self.registerGrid = function registerGrid (grid) {
 
 
 self.init = function init() {
+	grids = [];
+	mediaRules = [];
+	mediaQueries = [];
+
   // adds required CSS rule to hide 'content' based
   // configuration.
 
-  var css = document.createElement("style");
-  css.innerHTML = "[data-columns]::before{display:block;visibility:hidden;position:absolute;font-size:1px;}";
-  document.head.appendChild(css);
-
+  var styleId = document.getElementById("salvattore-content-style");
+  if (!styleId) {
+	  var css = document.createElement("style");
+  
+	  var att = document.createAttribute("id");       // Create a "class" attribute
+	  att.value = "salvattore-content-style";                           // Set the value of the class attribute
+	  css.setAttributeNode(att);
+  
+	  css.innerHTML = "[data-columns]::before{display:block;visibility:hidden;position:absolute;font-size:1px;}";
+	  document.head.appendChild(css);
+  }
   // scans all the grids in the document and generates
   // columns from their configuration.
 
@@ -603,3 +617,7 @@ return {
 
 return salvattore;
 }));
+
+}
+
+salvattoreInit();
